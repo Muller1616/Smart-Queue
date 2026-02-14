@@ -4,12 +4,10 @@ import Register from "./pages/Register";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -17,7 +15,7 @@ function App() {
         <Route
           path="/user"
           element={
-            <ProtectedRoute role="user">
+            <ProtectedRoute role="USER">
               <UserDashboard />
             </ProtectedRoute>
           }
@@ -26,7 +24,7 @@ function App() {
         <Route
           path="/admin"
           element={
-            <ProtectedRoute role="admin">
+            <ProtectedRoute role="ADMIN">
               <AdminDashboard />
             </ProtectedRoute>
           }

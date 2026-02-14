@@ -12,7 +12,10 @@ export const protect = async (req, res, next) => {
   }
 
   if (!token) {
-    return res.status(401).json({ message: "Not authorized" });
+    return res.status(401).json({ 
+        success: false,
+        message: "Not authorized to access this route" 
+    });
   }
 
   try {
@@ -20,6 +23,9 @@ export const protect = async (req, res, next) => {
     req.user = await User.findById(decoded.id);
     next();
   } catch (error) {
-    res.status(401).json({ message: "Token invalid" });
+    res.status(401).json({ 
+        success: false,
+        message: "Token is invalid or expired" 
+    });
   }
 };

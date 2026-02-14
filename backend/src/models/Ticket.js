@@ -18,7 +18,7 @@ const ticketSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["waiting", "serving", "completed"],
+      enum: ["waiting", "serving", "served", "cancelled", "completed"],
       default: "waiting"
     }
   },

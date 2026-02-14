@@ -4,6 +4,7 @@ import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import errorHandler from "./middlewares/error.middleware.js";
 import ticketRoutes from "./routes/ticket.routes.js";
+import queueRoutes from "./routes/queue.routes.js";
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/tickets", ticketRoutes);
+app.use("/api/queues", queueRoutes);
 app.use(errorHandler);
 
 export default app;

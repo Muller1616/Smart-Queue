@@ -23,11 +23,15 @@ export const register = asyncHandler(async (req, res) => {
   }
 
   const user = await User.create({ name, email, password });
+  
+  // Remove password from response
+  user.password = undefined;
 
   res.status(201).json({
     success: true,
     message: "User registered successfully",
-    token: generateToken(user._id)
+    token: generateToken(user._id),
+    data: { user }
   });
 });
 
@@ -44,9 +48,13 @@ export const login = asyncHandler(async (req, res) => {
     throw new AppError("Invalid email or password", 401);
   }
 
+  // Remove password from response
+  user.password = undefined;
+
   res.status(200).json({
     success: true,
     message: "Login successful",
-    token: generateToken(user._id)
+    token: generateToken(user._id),
+    data: { user }
   });
 });
