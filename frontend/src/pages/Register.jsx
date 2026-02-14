@@ -22,7 +22,7 @@ function Register() {
     try {
       await API.post("/auth/register", form);
       toast.success("Registered successfully!");
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       toast.error(err.response?.data?.message || "Registration failed");
     } finally {
@@ -71,7 +71,7 @@ function Register() {
           </Button>
         </form>
         <p className="mt-4 text-center text-gray-400 text-sm">
-          Already have an account? <Link to="/" className="text-accent hover:underline">Login</Link>
+          Already have an account? <Link to="/login" className="text-accent hover:underline">Login</Link>
         </p>
       </Card>
     </div>

@@ -258,3 +258,38 @@ export const completeTicket = asyncHandler(async (req, res) => {
         data: ticket
     });
 });
+
+// Get user ticket history
+export const getTicketHistory = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    const tickets = await Ticket.find({ 
+        user: userId, 
+        status: { $in: ['served', 'cancelled'] } 
+    })
+    .sort({ createdAt: -1 })
+    .populate('queue', 'name');
+
+    res.status(200).json({
+        success: true,
+        count: tickets.length,
+        data: tickets
+    });
+});
+
+// Get all ticket logs (Admin)
+export const getAllTicketLogs = asyncHandler(async (req, res) => {
+    const tickets = await Ticket.find({ 
+        status: { $in: ['served', 'cancelled'] } 
+    })
+    .sort({ createdAt: -1 })
+    .limit(100) // Limit to last 100 for performance
+    .populate('user', 'name email')
+    .populate('queue', 'name');
+
+    res.status(200).json({
+        success: true,
+        count: tickets.length,
+        data: tickets
+    });
+});

@@ -8,7 +8,9 @@ import {
     getMyTicket, 
     cancelMyTicket, 
     getQueueStats,
-    completeTicket
+    completeTicket,
+    getTicketHistory,
+    getAllTicketLogs
 } from "../controllers/ticket.controller.js";
 
 
@@ -21,5 +23,7 @@ router.get("/queue", protect, getQueue);
 router.get("/my-ticket", protect, getMyTicket);
 router.put("/cancel", protect, cancelMyTicket);
 router.get("/stats", protect, adminOnly, getQueueStats);
+router.get("/history", protect, getTicketHistory);
+router.get("/logs", protect, adminOnly, getAllTicketLogs);
 
 export default router;
